@@ -3,7 +3,7 @@
  * Creates a dropdown-like button with checkboxes.
  *
  * Project started on: Tue, 14 Jan 2014 - 5:18:02 PM
- * Current version: 4.0.0
+ * Current version: 4.0.3
  *
  * Released under the MIT License
  * --------------------------------------------------------------------------------
@@ -104,15 +104,26 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             // Infinite scroll for items in checkbox
             var checkBoxContainer = angular.element(element).find('.checkBoxContainer');
             var raw = checkBoxContainer[0];
-            $scope.scrollLimit = 10;
+            $scope.scrollLimit = 20;
 
-            checkBoxContainer.bind('scroll', function() {
+            checkBoxContainer.on('wheel', function() {
                 var scrollTop = raw.scrollTop;
                 var scrollHeight = raw.scrollHeight;
                 var offsetHeight = raw.offsetHeight;
 
                 if (scrollTop === (scrollHeight - offsetHeight) && $scope.scrollLimit < $scope.inputModel.length) {
                     $scope.$apply(function() {
+                        $scope.scrollLimit += 10;
+                    });
+                }
+            });
+            checkBoxContainer.on('touchmove', function () {
+                var scrollTop = raw.scrollTop;
+                var scrollHeight = raw.scrollHeight;
+                var offsetHeight = raw.offsetHeight;
+
+                if (scrollTop === (scrollHeight - offsetHeight) && $scope.scrollLimit < $scope.inputModel.length) {
+                    $scope.$apply(function () {
                         $scope.scrollLimit += 10;
                     });
                 }
@@ -568,8 +579,10 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                         if (tempMaxLabels > 0) {
                             $scope.varButtonLabel += ', ... ';
                         }
-                        $scope.varButtonLabel += '(' + $scope.outputModel.length + ')';
+                        $scope.varButtonLabel += '(Total: ' + $scope.outputModel.length + '/' + $scope.inputModel.length + ')';
                     }
+                    if ($scope.outputModel.length == $scope.inputModel.length)
+                        $scope.varButtonLabel = 'ALL';
                 }
                 $scope.varButtonLabel = $sce.trustAsHtml( $scope.varButtonLabel + '<span class="caret"></span>' );
             }
@@ -681,6 +694,8 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                     // focus on the filter element on open.
                     if ( element[ 0 ].querySelector( '.inputFilter' ) ) {
                         $timeout(function() {
+                            element[ 0 ].querySelector( '.inputFilter' ).focus();
+                        element[ 0 ].querySelector( '.inputFilter' ).focus();    
                             element[ 0 ].querySelector( '.inputFilter' ).focus();
                             $scope.tabIndex = $scope.tabIndex + helperItemsLength - 2;
                             // blur button in vain

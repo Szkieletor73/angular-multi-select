@@ -1,3 +1,10 @@
+### v4.0.3
+- Merged with Infinite Scroll code from https://github.com/JamesWooldridge/angular-multi-select
+- Personalization changes:
+  - When all rows are selected, show "ALL" instead of total.
+  - Otherwise, show the label as "Total: (selected / total)"
+  - Changed "scroll" event to "wheel" and "touchmove", due to "scroll" causing some issues with the specific implementation I needed.
+
 ### v4.0.0
 ##### Added / Updated
 - You can now customize output-model properties that you need, instead of having all data.
