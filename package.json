@@ -26,8 +26,8 @@
     },
     "homepage": "https://github.com/isteven/angular-multi-select",
     "dependencies": {
-        "angular-mocks": "1.6.1",
-        "angular-sanitize": "1.6.1",
+        "angular-mocks": "1.8.2",
+        "angular-sanitize": "1.8.2",
         "http-server": "^0.10.0",
         "jasmin": "0.0.2",
         "jasmine-core": "^2.2.0",
