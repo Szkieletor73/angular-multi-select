@@ -28,7 +28,7 @@
     "dependencies": {
         "angular-mocks": "1.6.1",
         "angular-sanitize": "1.6.1",
-        "http-server": "^0.10.0",
+        "http-server": "^0.12.2",
         "jasmin": "0.0.2",
         "jasmine-core": "^2.2.0",
         "karma-chrome-launcher": "^0.2.0",
